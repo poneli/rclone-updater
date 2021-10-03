@@ -21,7 +21,7 @@ if [[ $latestversion > $currentversion ]]; then
 	printf "Stopping rclone... \n";
 	systemctl stop rclone.service 2>&1 >/dev/null
 	printf "Installing update... \n";
-	dnf install $downloadfolder/*.rpm &>/dev/null
+	yum localinstall -y $downloadfolder/*.rpm &>/dev/null
 	if [[ $(rclone -V | awk -F'[ ]' '/rclone/ { print substr($2, 2)}') = $latestversion ]]; then
 	  printf -- "rclone upgraded successfully from version %s to %s... \n" $currentversion $latestversion;
 	  printf -- "%(%Y-%m-%d %H:%M:%S)T [SUCCESS] rclone upgraded to %s... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null;
@@ -32,6 +32,8 @@ if [[ $latestversion > $currentversion ]]; then
 	else
 	  printf -- "Installation of rclone %s failed... \nTerminated... \n" $latestversion;
 	  printf -- "%(%Y-%m-%d %H:%M:%S)T [ERROR] rclone %s upgrade failed... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null;
+	  printf -- "Cleaning up %s... \n" $downloadfolder;
+	  rm -f $downloadfolder/*.rpm
 	fi
 else
 	printf -- "rclone %s is already installed... \nTerminated... \n" $latestversion;
