@@ -7,7 +7,7 @@
 #### <VARIABLES>
 latestversion=$(curl -fs https://downloads.rclone.org/version.txt | awk -F'[ ]' '/rclone/ { print substr($2, 2)}')
 currentversion=$(rclone -V | awk -F'[ ]' '/rclone/ { print substr($2, 2)}')
-package=$(echo https://downloads.rclone.org/rclone-current-linux-amd64.deb)
+package="https://downloads.rclone.org/rclone-current-linux-amd64.deb"
 downloadfolder="/change/me/example/directory" # No trailing slash
 #### </VARIABLES>
 if [[ $EUID > 0 ]]; then
