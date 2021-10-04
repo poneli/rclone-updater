@@ -12,3 +12,4 @@ Update downloadfolder="/change/me/example/directory" to the directory where you 
 Run with sudo.
 
 Cheers!
+
