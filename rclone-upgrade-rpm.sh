@@ -5,9 +5,9 @@
 #### Published on: https://github.com/poneli/
 #### =====================================================================
 #### <VARIABLES>
-latestversion=$(curl -s -L https://rclone.org/downloads/ | awk -F'[ <]' '/Rclone Download/ { print substr($5, 2)}')
+latestversion=$(curl -fs https://downloads.rclone.org/version.txt | awk -F'[ ]' '/rclone/ { print substr($2, 2)}')
 currentversion=$(rclone -V | awk -F'[ ]' '/rclone/ { print substr($2, 2)}')
-package=$(echo https://downloads.rclone.org/v$latestversion/rclone-v$latestversion-linux-amd64.rpm)
+package=$(echo https://downloads.rclone.org/rclone-current-linux-amd64.rpm)
 downloadfolder="/change/me/example/directory" # No trailing slash
 #### </VARIABLES>
 if [[ $EUID > 0 ]]; then
