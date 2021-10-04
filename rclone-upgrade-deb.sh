@@ -21,13 +21,13 @@ if [[ $latestversion > $currentversion ]]; then
 	printf "Installing update... \n"
 	dpkg -i $downloadfolder/*.deb &>/dev/null
 	if [[ $(rclone -V | awk -F'[ ]' '/rclone/ { print substr($2, 2)}') = $latestversion ]]; then
-	  printf "rclone upgraded successfully from version %s to %s... \n" $currentversion $latestversion
-	  printf "%(%Y-%m-%d %H:%M:%S)T [SUCCESS] rclone upgraded to %s... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null
+	  printf "rclone updated successfully from version %s to %s... \n" $currentversion $latestversion
+	  printf "%(%Y-%m-%d %H:%M:%S)T [SUCCESS] rclone updated to %s... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null
 	  printf "Cleaning up %s... \n" $downloadfolder
 	  rm -f $downloadfolder/*.deb
 	else
 	  printf "Installation of rclone %s failed... \nTerminated... \n" $latestversion
-	  printf "%(%Y-%m-%d %H:%M:%S)T [ERROR] rclone %s upgrade failed... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null
+	  printf "%(%Y-%m-%d %H:%M:%S)T [ERROR] rclone %s update failed... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null
 	  printf "Cleaning up %s... \n" $downloadfolder
 	  rm -f $downloadfolder/*.deb
 	fi
