@@ -37,5 +37,5 @@ if [[ $latestversion > $currentversion ]]; then
 	fi
 else
 	printf "rclone %s is already installed... \nTerminated... \n" $latestversion
-	printf "%(%Y-%m-%d %H:%M:%S)T [INFO] rclone %s is already installed... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null;
+	printf "%(%Y-%m-%d %H:%M:%S)T [INFO] rclone %s is already installed... \n" $(date +%s) $latestversion | tee -a $downloadfolder/update.log >/dev/null
 fi
