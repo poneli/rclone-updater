@@ -22,16 +22,16 @@ if [[ $latestversion > $currentversion ]]; then
 	dpkg -i $downloadfolder/*.deb &>/dev/null
 	if [[ $(rclone -V | awk -F'[ ]' '/rclone/ { print substr($2, 2)}') = $latestversion ]]; then
 	  printf "rclone updated successfully from version %s to %s... \n" "$currentversion" "$latestversion"
-	  printf -- "%(%Y-%m-%d %H:%M:%S)T [SUCCESS] rclone updated to %s... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
+	  printf -- "%(%Y-%m-%d %H:%M)T [SUCCESS] rclone updated to %s... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
 	  printf "Cleaning up %s... \n" "$downloadfolder"
 	  rm -f $downloadfolder/*.deb
 	else
 	  printf "Installation of rclone %s failed... \nTerminated... \n" "$latestversion"
-	  printf -- "%(%Y-%m-%d %H:%M:%S)T [ERROR] rclone %s update failed... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
+	  printf -- "%(%Y-%m-%d %H:%M)T [ERROR] rclone %s update failed... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
 	  printf "Cleaning up %s... \n" "$downloadfolder"
 	  rm -f $downloadfolder/*.deb
 	fi
 else
 	printf "rclone %s is already installed... \nTerminated... \n" "$latestversion"
-	printf -- "%(%Y-%m-%d %H:%M:%S)T [INFO] rclone %s is already installed... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
+	printf -- "%(%Y-%m-%d %H:%M)T [INFO] rclone %s is already installed... \n" "$(date +%s)" "$latestversion" | tee -a $downloadfolder/update.log >/dev/null
 fi
